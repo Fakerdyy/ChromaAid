@@ -2,7 +2,7 @@
 
 ## Descipción de la problematica 
 
-En la imprenta donde trabajo, dos colaboradores presentan dificultades para distinguir
+<p align="justify"> En la imprenta donde trabajo, dos colaboradores presentan dificultades para distinguir
 correctamente ciertos colores debido al daltonismo y debido a situaciones económicas no
 cuentan con el solvente económico para comprar gafas especializadas. Esta situación
 genera errores durante el proceso de impresión, principalmente en la selección, verificación
@@ -14,7 +14,8 @@ Esta problemática afecta directamente a los trabajadores con daltonismo, pero t
 impacta a la empresa, ya que los errores de color pueden provocar reimpresiones,
 desperdicio de material, aumento de costos y retrasos en las entregas a los clientes.
 Actualmente, no existe un sistema que apoye a estos colaboradores para validar colores de
-manera objetiva, accesible y sobre todo un apoyo para no descartar en el trabajo.
+manera objetiva, accesible y sobre todo un apoyo para no descartar en el trabajo.</p>
+
 
 
 * Descripción de la problemática.
