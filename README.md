@@ -16,7 +16,11 @@ desperdicio de material, aumento de costos y retrasos en las entregas a los clie
 Actualmente, no existe un sistema que apoye a estos colaboradores para validar colores de
 manera objetiva, accesible y sobre todo un apoyo para no descartar en el trabajo.</p>
 
-
+| Región / País        | Prevalencia en hombres | Prevalencia en mujeres | Tipos más comunes (aprox.) | Estimación poblacional afectada | Notas relevantes |
+|----------------------|------------------------|------------------------|----------------------------|--------------------------------|------------------|
+| México (nacional)    | ~8–10%                 | ~0.5–1%                | Rojo-verde (protanopia, deuteranopia) ~95% de casos; azul-amarillo (tritanopia) <5% | ~6 millones de personas | La Secretaría de Salud reporta que 1 de cada 10 hombres presenta daltonismo; en mujeres es mucho menos frecuente. |
+| Jalisco (estado)     | ~8–10% (similar al promedio nacional) | ~0.5–1% | Rojo-verde predominante | ~400,000 personas | No existen estudios específicos, pero aplicando la prevalencia nacional a la población del estado (~8 millones) se obtiene esta estimación. |
+| Mundial              | 8% (1 de cada 12 hombres) | 0.5% (1 de cada 200 mujeres) | Rojo-verde ~95%; azul-amarillo ~5% | ~300–320 millones de personas | La OMS y estudios internacionales coinciden en que el daltonismo rojo-verde es el más común. |
 
 * Descripción de la problemática.
 * Datos crudos identificados y cómo se obtendrían.
