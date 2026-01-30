@@ -1,25 +1,5 @@
-# Propuesta 1: ChromaAid
+# Errores en la  identificación de colores en procesos de impresión por trabajadores con daltonismo
 
-Esta es la propuesta 1.
-
-## Este es otro titulo
-
-# Andyy
-
-## Andyy
-
-* Hola
-
-**Adios**
-
-|a|b|
-|-|-|
-|0|1|
-
-
-#### Lo que te pide Leon es:
-
-* Título de la problemática.
 * Descripción de la problemática.
 * Datos crudos identificados y cómo se obtendrían.
 * Alcance.
