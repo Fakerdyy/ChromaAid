@@ -8,12 +8,12 @@
   "orientation": "portrait",
   "icons": [
     {
-      "src": "iconochromaaid.png",
+      "src": "iconchromaaid.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "icons/iconochromaaid.png",
+      "src": "icons/iconchromaaid.png",
       "sizes": "512x512",
       "type": "image/png"
     }
