@@ -839,6 +839,10 @@ select {
   box-shadow: inset 0 0 0 1px rgba(31, 31, 31, 0.12);
 }
 
+.responsive-table {
+  width: 100%;
+}
+
 .color-box {
   width: 100%;
   min-height: 92px;
@@ -1559,6 +1563,255 @@ select {
   }
 }
 
+@media (max-width: 600px) {
+  .app-shell {
+    width: 100%;
+    max-width: 100%;
+    padding: 18px;
+  }
+
+  .screen,
+  #screen-detect-color,
+  #screen-compare,
+  .detect-workspace,
+  .compare-workspace {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .detect-workspace,
+  .compare-workspace,
+  .vision-card-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .detect-source-card,
+  .detect-result-card,
+  .vision-preview-card,
+  .diagnosis-card,
+  .compare-picker-card,
+  .compare-source-card,
+  .compare-result-card,
+  .tool-card,
+  .result-card,
+  .compare-card,
+  .color-card,
+  .history-card {
+    width: 100%;
+    max-width: 100%;
+    padding: 18px;
+    border-radius: 20px;
+  }
+
+  .button-row,
+  .action-row,
+  .compare-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+  }
+
+  button,
+  .primary-btn,
+  .secondary-btn {
+    width: 100%;
+    min-height: 48px;
+    font-size: 15px;
+    white-space: normal;
+  }
+
+  input,
+  select,
+  input[type="color"],
+  input[type="file"] {
+    width: 100%;
+    min-height: 46px;
+    font-size: 16px;
+  }
+
+  input[type="color"] {
+    height: 58px;
+  }
+
+  .color-preview,
+  .color-swatch,
+  .vision-swatch,
+  .large-swatch {
+    width: 100%;
+    height: 90px;
+    min-height: 90px;
+    border-radius: 18px;
+  }
+
+  #camera,
+  #compare-camera,
+  #detect-image-canvas,
+  #compare-image-canvas,
+  .image-sampler {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    max-height: none;
+    border-radius: 18px;
+  }
+
+  #camera,
+  #compare-camera {
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+  }
+
+  .color-meta,
+  .compare-summary,
+  .recommendation-box,
+  .status-text,
+  .vision-card,
+  .metric-grid div {
+    overflow-wrap: anywhere;
+    word-break: normal;
+  }
+
+  .target-selector,
+  .metric-grid,
+  .compare-grid,
+  .vision-grid,
+  .simulation-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .target-selector label {
+    justify-content: flex-start;
+    min-height: 50px;
+  }
+
+  .color-info-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .vision-card {
+    grid-template-columns: 1fr;
+    text-align: left;
+  }
+
+  .vision-card .vision-swatch {
+    justify-self: center;
+  }
+
+  .diagnosis-table-wrap {
+    overflow: visible;
+  }
+
+  .responsive-table,
+  .responsive-table thead,
+  .responsive-table tbody,
+  .responsive-table tr,
+  .responsive-table th,
+  .responsive-table td {
+    display: block;
+    width: 100%;
+  }
+
+  .responsive-table {
+    min-width: 0;
+    border-spacing: 0;
+  }
+
+  .responsive-table thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+
+  .responsive-table tbody {
+    display: grid;
+    gap: 12px;
+  }
+
+  .responsive-table tr {
+    padding: 14px;
+    border-radius: 18px;
+    background: var(--surface);
+  }
+
+  .responsive-table td {
+    padding: 8px 0;
+    background: transparent;
+    color: var(--text);
+    border-radius: 0;
+  }
+
+  .responsive-table td:first-child,
+  .responsive-table td:last-child {
+    border-radius: 0;
+  }
+
+  .responsive-table td::before {
+    display: block;
+    margin-bottom: 4px;
+    color: var(--muted);
+    font-size: 0.78rem;
+    font-weight: 800;
+    text-transform: uppercase;
+  }
+
+  .responsive-table td[colspan]::before {
+    content: none;
+  }
+
+  .detect-diagnosis-table td:nth-child(1)::before {
+    content: "Tipo de visión";
+  }
+
+  .detect-diagnosis-table td:nth-child(2)::before {
+    content: "Color percibido";
+  }
+
+  .detect-diagnosis-table td:nth-child(3)::before {
+    content: "HEX simulado";
+  }
+
+  .detect-diagnosis-table td:nth-child(4)::before {
+    content: "Muestra visual";
+  }
+
+  .compare-diagnosis-table td:nth-child(1)::before {
+    content: "Tipo de visión";
+  }
+
+  .compare-diagnosis-table td:nth-child(2)::before {
+    content: "Vista Color A";
+  }
+
+  .compare-diagnosis-table td:nth-child(3)::before {
+    content: "Vista Color B";
+  }
+
+  .compare-diagnosis-table td:nth-child(4)::before {
+    content: "Resultado";
+  }
+
+  .table-swatch {
+    width: 100%;
+    height: 56px;
+    border-radius: 16px;
+  }
+
+  .modal-content {
+    width: calc(100% - 24px);
+    max-height: 85vh;
+    padding: 18px;
+  }
+}
+
 @media (max-width: 559px) {
   body {
     padding: 0;
@@ -1568,7 +1821,7 @@ select {
   .app-shell {
     max-width: none;
     min-height: 100vh;
-    padding: 16px;
+    padding: 18px;
     border-radius: 0;
     box-shadow: none;
     background: rgba(255, 255, 255, 0.64);
@@ -1728,7 +1981,7 @@ select {
 
   .app-shell {
     min-height: 100vh;
-    padding: 12px;
+    padding: 18px;
     border-radius: 0;
   }
 
