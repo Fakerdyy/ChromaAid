@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ChromaAid</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" href="style.css?v=3" />
+  <meta name="theme-color" content="#7B5BEF" />
+  <link rel="icon" type="image/png" href="icons/iconochromaaid.png">
+  <meta name="theme-color" content="#4F2DB8">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+</head>
+
+<body>
+  <main class="app-shell">
+    <!-- Pantalla inicial: inicio de sesión del usuario. -->
+    <section id="screen-login" class="screen active" aria-labelledby="login-title">
+      <header class="page-header auth-header">
+        <span class="app-badge">Bienvenido</span>
+        <h1 id="login-title">ChromaAid</h1>
+        <p>Inicia sesión para acceder a tus herramientas de apoyo cromático.</p>
+      </header>
+
+      <form id="login-form" class="card auth-card" novalidate>
+        <label class="field-label" for="login-email">Correo electrónico</label>
+        <input id="login-email" type="email" autocomplete="email" placeholder="correo@ejemplo.com" />
+
+        <label class="field-label" for="login-password">Contraseña</label>
+        <input id="login-password" type="password" autocomplete="current-password" placeholder="Mínimo 6 caracteres" />
+
+        <p id="login-message" class="form-message" aria-live="polite"></p>
+
+        <button class="primary-btn" type="submit">Iniciar sesión</button>
+        <button class="secondary-btn" type="button" data-screen="screen-register">Crear cuenta</button>
+        <button class="link-btn" type="button" data-screen="screen-recover">Recuperar contraseña</button>
+      </form>
+    </section>
+
+    <!-- Pantalla de registro: crea usuarios en localStorage. -->
+    <section id="screen-register" class="screen" aria-labelledby="register-title">
+      <div class="topbar">
+        <button class="back-btn" type="button" data-screen="screen-login" aria-label="Volver al login">←</button>
+        <h2 id="register-title">Registro</h2>
+      </div>
+
+      <form id="register-form" class="card auth-card" novalidate>
+        <label class="field-label" for="register-name">Nombre completo</label>
+        <input id="register-name" type="text" autocomplete="name" placeholder="Tu nombre" />
+
+        <label class="field-label" for="register-email">Correo electrónico</label>
+        <input id="register-email" type="email" autocomplete="email" placeholder="correo@ejemplo.com" />
+
+        <label class="field-label" for="register-password">Contraseña</label>
+        <input id="register-password" type="password" autocomplete="new-password" placeholder="Mínimo 6 caracteres" />
+
+        <label class="field-label" for="register-confirm-password">Confirmar contraseña</label>
+        <input id="register-confirm-password" type="password" autocomplete="new-password" placeholder="Repite tu contraseña" />
+
+        <p id="register-message" class="form-message" aria-live="polite"></p>
+
+        <button class="primary-btn" type="submit">Registrarse</button>
+      </form>
+    </section>
+
+    <!-- Pantalla de recuperación: demo local para verificar si un correo existe. -->
+    <section id="screen-recover" class="screen" aria-labelledby="recover-title">
+      <div class="topbar">
+        <button class="back-btn" type="button" data-screen="screen-login" aria-label="Volver al login">←</button>
+        <h2 id="recover-title">Recuperar contraseña</h2>
+      </div>
+
+      <form id="recover-form" class="card auth-card" novalidate>
+        <p>Escribe tu correo y te mostraremos una confirmación si existe una cuenta registrada en este dispositivo.</p>
+
+        <label class="field-label" for="recover-email">Correo electrónico</label>
+        <input id="recover-email" type="email" autocomplete="email" placeholder="correo@ejemplo.com" />
+
+        <p id="recover-message" class="form-message" aria-live="polite"></p>
+
+        <button class="primary-btn" type="submit">Verificar correo</button>
+      </form>
+    </section>
+
+    <!-- Pantalla principal: menú de herramientas de ChromaAid. -->
+    <section id="screen-home" class="screen" aria-labelledby="home-title">
+      <header class="page-header">
+        <div class="home-actions">
+          <span class="app-badge">Apoyo cromático</span>
+          <button id="logout-btn" class="logout-btn" type="button">Cerrar sesión</button>
+        </div>
+        <h1 id="home-title">ChromaAid</h1>
+        <p id="home-subtitle">Asistente de apoyo cromático para daltonismo</p>
+      </header>
+
+      <!-- Menú de acceso rápido a todas las funciones. -->
+      <div class="grid-menu" aria-label="Herramientas principales">
+        <button class="menu-card" type="button" data-screen="screen-intro-test">
+          <span class="menu-icon-wrap">
+            <img src="./icons/iconstest.gif" alt="" class="menu-icon" />
+          </span>
+          <span class="menu-content">
+            <span class="menu-title">Test de Daltonismo</span>
+            <span class="menu-description">Evalúa tu visión cromática</span>
+          </span>
+        </button>
+
+        <button class="menu-card" type="button" data-screen="screen-detect-color">
+          <span class="menu-icon-wrap">
+            <img src="./icons/iconscamera.gif" alt="" class="menu-icon" />
+          </span>
+          <span class="menu-content">
+            <span class="menu-title">Detectar Color</span>
+            <span class="menu-description">Usa la cámara del dispositivo</span>
+          </span>
+        </button>
+
+        <button class="menu-card" type="button" data-screen="screen-compare">
+          <span class="menu-icon-wrap">
+            <img src="./icons/iconspalette.gif" alt="" class="menu-icon" />
+          </span>
+          <span class="menu-content">
+            <span class="menu-title">Comparar Colores</span>
+            <span class="menu-description">Mide similitud entre tonos</span>
+          </span>
+        </button>
+
+        <button class="menu-card" type="button" data-screen="screen-different-color">
+          <span class="menu-icon-wrap">
+            <img src="./icons/icondegradado.gif" alt="" class="menu-icon" />
+          </span>
+          <span class="menu-content">
+            <span class="menu-title">Encuentra el color diferente</span>
+            <span class="menu-description">Detecta el cuadro distinto</span>
+          </span>
+        </button>
+
+        <button class="menu-card" type="button" data-screen="screen-history">
+          <span class="menu-icon-wrap">
+            <img src="./icons/iconshistory.gif" alt="" class="menu-icon" />
+          </span>
+          <span class="menu-content">
+            <span class="menu-title">Historial</span>
+            <span class="menu-description">Consulta resultados guardados</span>
+          </span>
+        </button>
+      </div>
+
+      <!-- Tarjeta informativa que cambia automáticamente cada cierto tiempo. -->
+      <article class="fun-fact-card" aria-live="polite">
+        <div class="fun-fact-icon" aria-hidden="true">💡</div>
+        <div class="fun-fact-content">
+          <div class="fun-fact-header">
+            <h2>Dato curioso</h2>
+            <span id="fun-fact-counter">Dato 1 de 10</span>
+          </div>
+          <p id="fun-fact-text">Cargando...</p>
+        </div>
+      </article>
+    </section>
+
+    <!-- Pantalla de instrucciones antes de iniciar el test Ishihara. -->
+    <section id="screen-intro-test" class="screen" aria-labelledby="intro-title">
+      <div class="topbar">
+        <button class="back-btn" type="button" data-screen="screen-home" aria-label="Volver al inicio">←</button>
+        <h2 id="intro-title">Instrucciones</h2>
+      </div>
+
+      <div class="card">
+        <p>La prueba te mostrará placas de Ishihara con números que debes identificar.</p>
+        <ul class="instruction-list">
+          <li>Quita lentes con filtro de color.</li>
+          <li>Usa buena iluminación.</li>
+          <li>Mantén el brillo de pantalla alto.</li>
+          <li>Observa cada imagen con calma.</li>
+        </ul>
+        <button id="start-test-btn" class="primary-btn" type="button">Iniciar prueba</button>
+      </div>
+    </section>
+
+    <!-- Pantalla del test: muestra placas e input de respuesta. -->
+    <section id="screen-test" class="screen" aria-labelledby="test-title">
+      <div class="topbar">
+        <button class="back-btn" type="button" data-screen="screen-home" aria-label="Volver al inicio">←</button>
+        <h2 id="test-title">Test de Daltonismo</h2>
+      </div>
+
+      <div class="card center">
+        <h3 id="question-title">Pregunta 1</h3>
+        <img id="test-image" src="img/ishihara1.png" alt="Placa Ishihara" class="test-image" />
+        <label class="field-label" for="answer-input">Numero que ves</label>
+        <input id="answer-input" type="number" inputmode="numeric" placeholder="Ej. 12" />
+        <button id="next-question-btn" class="primary-btn" type="button">Siguiente</button>
+      </div>
+    </section>
+
+    <!-- Pantalla final del test: reporte orientativo y recomendaciones. -->
+    <section id="screen-result" class="screen" aria-labelledby="result-title">
+      <div class="topbar">
+        <button class="back-btn" type="button" data-screen="screen-home" aria-label="Volver al inicio">←</button>
+        <h2 id="result-title">Resultado del test</h2>
+      </div>
+
+      <div class="test-result-workspace">
+        <section class="card test-result-hero">
+          <div id="result-icon" class="result-icon">?</div>
+          <div>
+            <span class="card-kicker">Resultado orientativo</span>
+            <h3 id="result-main">Resultado no concluyente</h3>
+            <p id="result-level">Nivel estimado: No concluyente</p>
+            <p id="result-type">Tipo orientativo: --</p>
+          </div>
+        </section>
+
+        <section class="card">
+          <h3>Puntaje</h3>
+          <div class="score-grid">
+            <div>
+              <span>Correctas</span>
+              <strong id="result-correct">0</strong>
+            </div>
+            <div>
+              <span>Incorrectas</span>
+              <strong id="result-incorrect">0</strong>
+            </div>
+            <div>
+              <span>Aciertos</span>
+              <strong id="result-percentage">0%</strong>
+            </div>
+          </div>
+          <div class="progress-track" aria-label="Porcentaje de aciertos">
+            <div id="result-progress" class="progress-fill"></div>
+          </div>
+        </section>
+
+        <section class="card">
+          <h3>Explicación del resultado</h3>
+          <p id="result-explanation" class="result-text">Completa el test para ver una explicación personalizada.</p>
+        </section>
+
+        <section class="card">
+          <h3>Colores que podrían confundirse</h3>
+          <div id="confusion-list" class="confusion-grid"></div>
+        </section>
+
+        <section id="recommendations-section" class="card">
+          <h3>Recomendaciones</h3>
+          <ul id="recommendation-list" class="instruction-list"></ul>
+        </section>
+
+        <section class="card medical-note">
+          <strong>Mensaje importante</strong>
+          <p>Este test es solo una herramienta orientativa. No sustituye una evaluación médica profesional. Si el resultado indica posibles señales de daltonismo o tienes dudas sobre tu visión, se recomienda acudir con un optometrista u oftalmólogo.</p>
+        </section>
+
+        <div class="button-row result-actions">
+          <button id="save-test-result-btn" class="primary-btn" type="button">Guardar resultado en historial</button>
+          <button id="repeat-test-btn" class="secondary-btn" type="button">Repetir test</button>
+          <button class="secondary-btn" type="button" data-screen="screen-home">Ir al menú principal</button>
+          <button id="view-recommendations-btn" class="secondary-btn" type="button">Ver recomendaciones</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Herramienta Detectar Color: cámara, imagen y simulaciones de visión. -->
+    <section id="screen-detect-color" class="screen" aria-labelledby="detect-title">
+      <div class="topbar">
+        <button class="back-btn" type="button" data-screen="screen-home" aria-label="Volver al inicio">←</button>
+        <h2 id="detect-title">Detectar Color</h2>
+      </div>
+
+      <div class="detect-workspace">
+        <section class="card detect-source-card">
+          <h3>Fuente de detección</h3>
+          <video id="camera" autoplay playsinline muted></video>
+          <canvas id="canvas"></canvas>
+
+          <div class="button-row">
+            <button id="detect-start-camera-btn" class="secondary-btn" type="button">Activar cámara</button>
+            <button id="capture-btn" class="primary-btn" type="button">Tomar color del centro</button>
+          </div>
+
+          <label class="field-label" for="detect-image-input">Subir imagen y tocar una zona</label>
+          <input type="file" id="detect-image-input" accept="image/*" />
+          <canvas id="detect-image-canvas" class="image-sampler" aria-label="Imagen para detectar color"></canvas>
+          <p id="detected-color-text" class="status-text">Activa la cámara o sube una imagen para comenzar.</p>
+        </section>
+
+        <section class="card detect-result-card">
+          <h3>Color detectado</h3>
+          <div id="detected-color-box" class="large-swatch" aria-label="Vista del color original"></div>
+
+          <div class="color-meta">
+            <strong id="detected-color-name">Sin color detectado</strong>
+            <span id="detected-color-hex">HEX: --</span>
+            <span id="detected-color-rgb">RGB: --</span>
+            <span id="detect-confidence">Confianza: --</span>
+          </div>
+
+          <p id="detect-explanation" class="compare-summary">
+            Esta simulación es aproximada y puede variar según la persona, la iluminación y la cámara del dispositivo.
+          </p>
+
+          <div class="button-row">
+            <button id="save-detection-btn" class="secondary-btn" type="button">Guardar detección en historial</button>
+            <button id="clear-detection-btn" class="secondary-btn" type="button">Limpiar</button>
+          </div>
+        </section>
+
+        <section class="card vision-preview-card">
+          <h3>Cómo podría verse este color</h3>
+          <div id="vision-cards" class="vision-card-grid">
+            <div class="vision-card empty">Sin detección todavía.</div>
+          </div>
+        </section>
+
+        <section class="card diagnosis-card">
+          <h3>Accesibilidad visual</h3>
+          <div class="diagnosis-table-wrap">
+            <table class="diagnosis-table">
+              <thead>
+                <tr>
+                  <th>Tipo de visión</th>
+                  <th>Color percibido</th>
+                  <th>HEX simulado</th>
+                  <th>Muestra visual</th>
+                </tr>
+              </thead>
+              <tbody id="detect-vision-table-body">
+                <tr>
+                  <td colspan="4">Sin color detectado todavía.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+
+      <div class="bottom-home-btn-container">
+        <button class="bottom-home-btn" type="button" onclick="showScreen('homeScreen')">
+          Volver al menú principal
+        </button>
+      </div>
+    </section>
+
+    <!-- Herramienta Comparar Colores: contraste, simulación y diagnóstico. -->
+    <section id="screen-compare" class="screen" aria-labelledby="compare-title">
+      <div class="topbar">
+        <button class="back-btn" type="button" data-screen="screen-home" aria-label="Volver al inicio">←</button>
+        <h2 id="compare-title">Comparar Colores</h2>
+      </div>
+
+      <div class="compare-workspace">
+        <section class="card compare-picker-card" aria-labelledby="color-a-title">
+          <h3 id="color-a-title">Color A</h3>
+          <div id="color-a-swatch" class="large-swatch"></div>
+
+          <label class="field-label" for="color-a-picker">Selector manual</label>
+          <input type="color" id="color-a-picker" value="#7b5bef" />
+
+          <label class="field-label" for="color-a-hex">Código HEX</label>
+          <input type="text" id="color-a-hex" value="#7B5BEF" maxlength="7" placeholder="#7B5BEF" />
+
+          <div class="color-meta">
+            <strong id="color-a-name">Morado</strong>
+            <span id="color-a-rgb">RGB: 123, 91, 239</span>
+            <span id="color-a-hex-label">HEX: #7B5BEF</span>
+          </div>
+        </section>
+
+        <section class="card compare-picker-card" aria-labelledby="color-b-title">
+          <h3 id="color-b-title">Color B</h3>
+          <div id="color-b-swatch" class="large-swatch"></div>
+
+          <label class="field-label" for="color-b-picker">Selector manual</label>
+          <input type="color" id="color-b-picker" value="#c9b8ff" />
+
+          <label class="field-label" for="color-b-hex">Código HEX</label>
+          <input type="text" id="color-b-hex" value="#C9B8FF" maxlength="7" placeholder="#C9B8FF" />
+
+          <div class="color-meta">
+            <strong id="color-b-name">Lila claro</strong>
+            <span id="color-b-rgb">RGB: 201, 184, 255</span>
+            <span id="color-b-hex-label">HEX: #C9B8FF</span>
+          </div>
+        </section>
+
+        <section class="card compare-source-card">
+          <h3>Capturar o extraer color</h3>
+
+          <div class="target-selector" aria-label="Seleccionar color destino">
+            <label>
+              <input type="radio" name="compare-target" value="a" checked />
+              Color A
+            </label>
+            <label>
+              <input type="radio" name="compare-target" value="b" />
+              Color B
+            </label>
+          </div>
+
+          <video id="compare-camera" autoplay playsinline muted></video>
+          <canvas id="compare-camera-canvas"></canvas>
+
+          <div class="button-row">
+            <button id="compare-start-camera-btn" class="secondary-btn" type="button">Activar cámara</button>
+            <button id="compare-capture-btn" class="primary-btn" type="button">Capturar color</button>
+          </div>
+
+          <label class="field-label" for="compare-image-input">Subir imagen y tocar una zona</label>
+          <input type="file" id="compare-image-input" accept="image/*" />
+          <canvas id="compare-image-canvas" class="image-sampler" aria-label="Imagen para extraer color"></canvas>
+          <p id="compare-source-message" class="status-text">Selecciona si quieres aplicar el color a A o B.</p>
+        </section>
+
+        <section class="card compare-result-card">
+          <h3>Resultado de accesibilidad</h3>
+          <p id="compare-summary" class="compare-summary">Presiona “Comparar colores” para analizar accesibilidad visual.</p>
+
+          <div class="metric-grid">
+            <div>
+              <span>Diferencia visual</span>
+              <strong id="visual-difference">--</strong>
+            </div>
+            <div>
+              <span>Contraste WCAG</span>
+              <strong id="contrast-ratio">--</strong>
+            </div>
+            <div>
+              <span>Escala de accesibilidad</span>
+              <strong id="accessibility-scale">--</strong>
+            </div>
+          </div>
+
+          <div id="recommendation-box" class="recommendation-box">
+            La recomendación aparecerá después de comparar.
+          </div>
+
+          <div class="button-row">
+            <button id="compare-btn" class="primary-btn" type="button">Comparar colores</button>
+            <button id="clear-compare-btn" class="secondary-btn" type="button">Limpiar</button>
+            <button id="save-compare-btn" class="secondary-btn" type="button">Guardar comparación en historial</button>
+          </div>
+        </section>
+
+        <section class="card diagnosis-card">
+          <h3>Diagnóstico de comparación</h3>
+
+          <div class="diagnosis-table-wrap">
+            <table class="diagnosis-table">
+              <thead>
+                <tr>
+                  <th>Tipo de visión</th>
+                  <th>Vista Color A</th>
+                  <th>Vista Color B</th>
+                  <th>Resultado</th>
+                </tr>
+              </thead>
+              <tbody id="diagnosis-table-body">
+                <tr>
+                  <td colspan="4">Sin comparación todavía.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+
+      <div class="bottom-home-btn-container">
+        <button class="bottom-home-btn" type="button" onclick="showScreen('homeScreen')">
+          Volver al menú principal
+        </button>
+      </div>
+    </section>
+
+    <!-- Juego visual: encontrar el cuadro con color diferente. -->
+    <section id="screen-different-color" class="screen" aria-labelledby="different-title">
+      <div class="topbar">
+        <button class="back-btn" type="button" data-screen="screen-home" aria-label="Volver al inicio">←</button>
+        <h2 id="different-title">Encuentra el color diferente</h2>
+      </div>
+
+      <div class="different-workspace">
+        <section class="card different-controls-card">
+          <p class="compare-summary">Toca el cuadro que tiene un color diferente.</p>
+
+          <div class="different-control-grid">
+            <div>
+              <label class="field-label" for="different-family">Gama de color</label>
+              <select id="different-family">
+                <option value="azul">Azul</option>
+                <option value="rosa">Rosa</option>
+                <option value="morado">Morado</option>
+                <option value="verde">Verde</option>
+                <option value="rojo">Rojo</option>
+                <option value="amarillo">Amarillo</option>
+                <option value="gris">Gris</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="field-label" for="different-difficulty">Dificultad</label>
+              <select id="different-difficulty">
+                <option value="facil">Fácil</option>
+                <option value="medio">Medio</option>
+                <option value="dificil">Difícil</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="field-label" for="different-vision">Simulación de visión</label>
+              <select id="different-vision">
+                <option value="normal">Visión normal</option>
+                <option value="protanopia">Protanopia</option>
+                <option value="deuteranopia">Deuteranopia</option>
+                <option value="tritanopia">Tritanopia</option>
+                <option value="monocromacia">Monocromacia</option>
+              </select>
+            </div>
+          </div>
+
+          <label class="help-toggle">
+            <input id="different-help-toggle" type="checkbox" />
+            Activar modo ayuda visual
+          </label>
+        </section>
+
+        <section class="card different-game-card">
+          <div class="game-status">
+            <span>Nivel: <strong id="nivelActual">1</strong></span>
+            <span>Puntaje: <strong id="puntajeActual">0</strong></span>
+            <span>Ronda: <strong id="rondaActual">0</strong>/<span id="totalRondas">10</span></span>
+          </div>
+
+          <div class="progress-container">
+            <div id="barraProgreso" class="progress-bar"></div>
+          </div>
+
+          <div class="different-stats">
+            <div>
+              <span>Puntaje actual</span>
+              <strong id="different-score">0</strong>
+            </div>
+            <div>
+              <span>Nivel actual</span>
+              <strong id="different-level">1</strong>
+            </div>
+            <div>
+              <span>Tiempo usado</span>
+              <strong id="temporizadorJuego">00:00</strong>
+            </div>
+          </div>
+
+          <div id="different-grid" class="different-grid" aria-label="Cuadrícula de colores"></div>
+          <p id="different-feedback" class="status-text">Encuentra el cuadro con el tono ligeramente diferente.</p>
+        </section>
+
+        <section class="card different-result-card">
+          <h3>Resultado final</h3>
+          <p id="different-result-text" class="compare-summary">El resultado aparecerá cuando termines o guardes la partida.</p>
+          <div class="score-grid">
+            <div>
+              <span>Puntaje</span>
+              <strong id="different-final-score">--</strong>
+            </div>
+            <div>
+              <span>Aciertos</span>
+              <strong id="different-hits">0</strong>
+            </div>
+            <div>
+              <span>Errores</span>
+              <strong id="different-errors">0</strong>
+            </div>
+          </div>
+
+          <div class="button-row">
+            <button id="new-different-btn" class="primary-btn" type="button">Reiniciar</button>
+            <button id="save-different-btn" class="secondary-btn" type="button">Guardar resultado en historial</button>
+          </div>
+        </section>
+      </div>
+
+      <div class="bottom-home-btn-container">
+        <button class="bottom-home-btn" type="button" onclick="showScreen('homeScreen')">
+          Volver al menú principal
+        </button>
+      </div>
+    </section>
+
+    <!-- Historial: registros filtrables de test, detecciones, comparaciones y juego. -->
+    <section id="screen-history" class="screen" aria-labelledby="history-title">
+      <div class="topbar">
+        <button class="back-btn" type="button" data-screen="screen-home" aria-label="Volver al inicio">←</button>
+        <h2 id="history-title">Historial</h2>
+      </div>
+
+      <div class="history-workspace">
+        <section class="card history-stats-card">
+          <div class="history-stat">
+            <span>Total de registros</span>
+            <strong id="history-total">0</strong>
+          </div>
+          <div class="history-stat">
+            <span>Último test</span>
+            <strong id="history-last-test">--</strong>
+          </div>
+          <div class="history-stat">
+            <span>Última detección</span>
+            <strong id="history-last-detection">--</strong>
+          </div>
+          <div class="history-stat">
+            <span>Resultado más reciente</span>
+            <strong id="history-latest-result">--</strong>
+          </div>
+        </section>
+
+        <section class="card history-controls-card">
+          <label class="field-label" for="history-search">Buscar historial</label>
+          <input id="history-search" type="text" placeholder="Buscar por resultado, color, fecha o tipo" />
+
+          <div class="history-filters" aria-label="Filtros del historial">
+            <button class="filter-btn active" type="button" data-history-filter="all">Todos</button>
+            <button class="filter-btn" type="button" data-history-filter="test">Test</button>
+            <button class="filter-btn" type="button" data-history-filter="detection">Detección</button>
+            <button class="filter-btn" type="button" data-history-filter="comparison">Comparación</button>
+            <button class="filter-btn" type="button" data-history-filter="different">Reto</button>
+          </div>
+        </section>
+
+        <section class="history-category" data-history-category="test">
+          <h3>Resultados del test</h3>
+          <div id="history-test-list" class="history-list"></div>
+        </section>
+
+        <section class="history-category" data-history-category="detection">
+          <h3>Detecciones de color</h3>
+          <div id="history-detection-list" class="history-list"></div>
+        </section>
+
+        <section class="history-category" data-history-category="comparison">
+          <h3>Comparaciones de colores</h3>
+          <div id="history-comparison-list" class="history-list"></div>
+        </section>
+
+        <section class="history-category" data-history-category="different">
+          <h3>Encuentra el color diferente</h3>
+          <div id="history-different-list" class="history-list"></div>
+        </section>
+
+        <section id="history-empty-state" class="card history-empty-state">
+          <strong>Aún no tienes registros guardados.</strong>
+          <p>Cuando guardes resultados del test, detecciones o comparaciones, aparecerán aquí.</p>
+          <button class="secondary-btn" type="button" data-screen="screen-home">Ir al menú principal</button>
+        </section>
+
+        <button id="clear-history-btn" class="history-clear-btn" type="button">Limpiar todo el historial</button>
+      </div>
+
+      <div class="bottom-home-btn-container">
+        <button class="bottom-home-btn" type="button" onclick="showScreen('homeScreen')">
+          Volver al menú principal
+        </button>
+      </div>
+    </section>
+  </main>
+
+  <!-- Modal para detalles completos de un registro del historial. -->
+  <div id="modalDetalle" class="modal" aria-hidden="true">
+    <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="modalTitulo">
+      <div class="modal-header">
+        <h2 id="modalTitulo">Detalle</h2>
+        <button id="close-history-detail-btn" type="button">Cerrar</button>
+      </div>
+      <div id="modalBody"></div>
+    </div>
+  </div>
+
+  <!-- Modal final del juego Encuentra el color diferente. -->
+  <div id="modalFinJuego" class="modal-fin" aria-hidden="true">
+    <div class="modal-fin-content" role="dialog" aria-modal="true" aria-labelledby="modalFinTitulo">
+      <div id="badgeResultado" class="resultado-badge bien">BIEN</div>
+      <h2 id="modalFinTitulo">¡Juego terminado!</h2>
+      <p id="modalFinSubtitulo">Buen trabajo</p>
+
+      <div class="final-score-grid">
+        <div>
+          <span>Puntaje total</span>
+          <strong id="puntajeFinal">0</strong>
+        </div>
+        <div>
+          <span>Nivel alcanzado</span>
+          <strong id="nivelFinal">1</strong>
+        </div>
+        <div>
+          <span>Aciertos</span>
+          <strong id="aciertosFinal">0</strong>
+        </div>
+        <div>
+          <span>Errores</span>
+          <strong id="erroresFinal">0</strong>
+        </div>
+        <div>
+          <span>Tiempo usado</span>
+          <strong id="tiempoFinal">00:00</strong>
+        </div>
+      </div>
+
+      <p class="final-message">Has completado el reto. Sigue entrenando tu percepción de colores.</p>
+
+      <div class="button-row">
+        <button id="play-again-different-btn" class="primary-btn" type="button">Volver a jugar</button>
+        <button id="save-final-different-btn" class="secondary-btn" type="button">Guardar resultado</button>
+        <button id="finish-menu-btn" class="secondary-btn" type="button">Ir al menú principal</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
