@@ -28,11 +28,12 @@ body {
   margin: 0;
   width: 100%;
   min-height: 100%;
+  overflow-x: hidden;
 }
 
 body {
   min-height: 100vh;
-  padding: 18px;
+  padding: clamp(12px, 4vw, 28px);
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -57,8 +58,9 @@ button {
    La app muestra una sola .screen.active a la vez.
 ========================= */
 .app-shell {
-  width: min(100%, 620px);
-  min-height: calc(100vh - 36px);
+  width: 100%;
+  max-width: 620px;
+  min-height: calc(100vh - 24px);
   padding: clamp(18px, 4vw, 34px);
   border-radius: 28px;
   background: rgba(255, 255, 255, 0.42);
@@ -69,6 +71,7 @@ button {
 .screen {
   display: none;
   width: 100%;
+  max-width: 100%;
   animation: screenIn 180ms ease-out;
 }
 
@@ -102,6 +105,8 @@ button {
 .auth-card {
   display: flex;
   flex-direction: column;
+  max-width: 460px;
+  margin-inline: auto;
 }
 
 .home-actions {
@@ -221,6 +226,7 @@ input:focus-visible {
 }
 
 .menu-title {
+  overflow-wrap: anywhere;
   color: var(--text);
   font-size: clamp(1rem, 2.4vw, 1.08rem);
   font-weight: 800;
@@ -240,6 +246,7 @@ input:focus-visible {
 .card,
 .fun-fact-card {
   width: 100%;
+  max-width: 100%;
   padding: clamp(18px, 4vw, 26px);
   border: 1px solid rgba(123, 91, 239, 0.08);
   border-radius: 26px;
@@ -389,6 +396,7 @@ input:focus-visible {
 .danger-btn,
 .secondary-btn {
   width: 100%;
+  max-width: 100%;
   min-height: 52px;
   margin-top: 14px;
   padding: 14px 18px;
@@ -415,6 +423,15 @@ input:focus-visible {
   background: var(--surface);
   color: var(--primary-dark);
   box-shadow: none;
+}
+
+.primary-btn:disabled,
+.danger-btn:disabled,
+.secondary-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.62;
+  transform: none;
+  filter: none;
 }
 
 .link-btn {
@@ -455,7 +472,7 @@ input:focus-visible {
   justify-content: center;
   margin-top: 32px;
   margin-bottom: 24px;
-  padding: 0 20px;
+  padding: 0;
 }
 
 .bottom-home-btn {
@@ -545,6 +562,7 @@ input[type="color"] {
 
 input[type="file"] {
   width: 100%;
+  max-width: 100%;
   padding: 12px;
   border: 1px dashed rgba(123, 91, 239, 0.34);
   border-radius: 18px;
@@ -779,7 +797,9 @@ select {
 
 .diagnosis-table-wrap {
   width: 100%;
+  max-width: 100%;
   overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .diagnosis-table {
@@ -1146,7 +1166,7 @@ select {
   display: grid;
   gap: clamp(7px, 2vw, 12px);
   width: 100%;
-  max-width: 560px;
+  max-width: min(560px, 100%);
   margin: 0 auto;
 }
 
@@ -1539,20 +1559,177 @@ select {
   }
 }
 
-@media (max-width: 380px) {
+@media (max-width: 559px) {
   body {
-    padding: 10px;
+    padding: 0;
+    background: var(--bg);
   }
 
   .app-shell {
-    min-height: calc(100vh - 20px);
-    padding: 14px;
-    border-radius: 22px;
+    max-width: none;
+    min-height: 100vh;
+    padding: 16px;
+    border-radius: 0;
+    box-shadow: none;
+    background: rgba(255, 255, 255, 0.64);
+  }
+
+  .page-header {
+    margin-bottom: 18px;
   }
 
   .home-actions {
-    align-items: flex-start;
+    align-items: stretch;
     flex-direction: column;
+  }
+
+  .logout-btn,
+  .filter-btn,
+  .history-small-btn,
+  .history-clear-btn {
+    width: 100%;
+    border-radius: 16px;
+  }
+
+  .topbar {
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .topbar h2 {
+    padding-top: 8px;
+    overflow-wrap: anywhere;
+  }
+
+  .card,
+  .fun-fact-card,
+  .history-record-card {
+    padding: 16px;
+    border-radius: 20px;
+  }
+
+  .menu-card {
+    min-height: 92px;
+    padding: 14px;
+    border-radius: 20px;
+  }
+
+  .primary-btn,
+  .danger-btn,
+  .secondary-btn,
+  .bottom-home-btn {
+    width: 100%;
+    min-height: 54px;
+    border-radius: 16px;
+  }
+
+  .bottom-home-btn-container {
+    margin-top: 18px;
+    margin-bottom: 8px;
+  }
+
+  .fun-fact-card,
+  .test-result-hero,
+  .vision-card {
+    grid-template-columns: 1fr;
+  }
+
+  .fun-fact-header,
+  .history-record-top {
+    flex-direction: column;
+  }
+
+  .history-record-title {
+    width: 100%;
+  }
+
+  .history-card-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .target-selector,
+  .history-stats-card,
+  .score-grid,
+  .different-stats,
+  .final-score-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .metric-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .vision-swatch {
+    width: 100%;
+    height: 92px;
+  }
+
+  .large-swatch {
+    min-height: 112px;
+    border-radius: 20px;
+  }
+
+  #camera,
+  #compare-camera,
+  .image-sampler,
+  .test-image,
+  video {
+    width: 100%;
+    max-width: 100%;
+    border-radius: 18px;
+  }
+
+  .diagnosis-table {
+    min-width: 480px;
+  }
+
+  .different-game-card {
+    padding-inline: 12px;
+  }
+
+  .different-grid {
+    gap: clamp(6px, 2.4vw, 10px);
+    max-width: calc(100vw - 56px);
+  }
+
+  .different-tile {
+    border-radius: clamp(9px, 3vw, 16px);
+    box-shadow: 0 6px 14px rgba(79, 45, 184, 0.12);
+  }
+
+  .game-start-card {
+    width: 100%;
+  }
+
+  .modal,
+  .modal-fin {
+    padding: 12px;
+  }
+
+  .modal-content,
+  .modal-fin-content {
+    max-height: calc(100vh - 24px);
+    padding: 18px;
+    border-radius: 22px;
+  }
+
+  .modal-header {
+    top: -18px;
+    margin: -18px -18px 14px;
+    padding: 18px 18px 12px;
+  }
+}
+
+@media (max-width: 380px) {
+  body {
+    padding: 0;
+  }
+
+  .app-shell {
+    min-height: 100vh;
+    padding: 12px;
+    border-radius: 0;
   }
 
   .menu-card {
@@ -1571,26 +1748,6 @@ select {
   .menu-icon {
     width: 46px;
     height: 46px;
-  }
-
-  .test-result-hero {
-    grid-template-columns: 1fr;
-  }
-
-  .score-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .fun-fact-card {
-    grid-template-columns: 1fr;
-  }
-
-  .fun-fact-header {
-    flex-direction: column;
-  }
-
-  .different-stats {
-    grid-template-columns: 1fr;
   }
 
 #textoDato {

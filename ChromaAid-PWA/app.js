@@ -203,6 +203,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const differentErrors = document.getElementById("different-errors");
   const differentResultText = document.getElementById("different-result-text");
   const newDifferentBtn = document.getElementById("new-different-btn");
+  const startDifferentControlBtn = document.getElementById("start-different-control-btn");
   const saveDifferentBtn = document.getElementById("save-different-btn");
   const nivelActual = document.getElementById("nivelActual");
   const puntajeActual = document.getElementById("puntajeActual");
@@ -1493,6 +1494,8 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     lastDifferentResult = null;
+    startDifferentControlBtn.disabled = false;
+    startDifferentControlBtn.textContent = "Iniciar juego";
     saveDifferentBtn.textContent = "Guardar resultado en historial";
     saveFinalDifferentBtn.textContent = "Guardar resultado";
     differentResultText.textContent = "El resultado aparecerá cuando termines o guardes la partida.";
@@ -1542,6 +1545,8 @@ document.addEventListener("DOMContentLoaded", () => {
       oddIndex: 0
     };
     lastDifferentResult = null;
+    startDifferentControlBtn.disabled = true;
+    startDifferentControlBtn.textContent = "Juego en curso";
     saveDifferentBtn.textContent = "Guardar resultado en historial";
     saveFinalDifferentBtn.textContent = "Guardar resultado";
     differentResultText.textContent = "El resultado aparecerá cuando termines o guardes la partida.";
@@ -1693,6 +1698,8 @@ document.addEventListener("DOMContentLoaded", () => {
     differentGame.finished = true;
     differentGame.started = false;
     clearInterval(differentTimer);
+    startDifferentControlBtn.disabled = false;
+    startDifferentControlBtn.textContent = "Iniciar juego";
     differentGrid.classList.add("locked");
     const seconds = Math.floor((Date.now() - differentGame.startedAt) / 1000);
     differentGame.elapsedSeconds = seconds;
@@ -1773,6 +1780,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
   differentVisionSelect.addEventListener("change", renderDifferentGrid);
   differentHelpToggle.addEventListener("change", renderDifferentGrid);
+  startDifferentControlBtn.addEventListener("click", iniciarJuegoColorDiferente);
   newDifferentBtn.addEventListener("click", prepareDifferentGame);
   saveDifferentBtn.addEventListener("click", () => {
     if (saveDifferentResult()) {
